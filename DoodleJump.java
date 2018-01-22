@@ -12,9 +12,11 @@ import java.awt.event.KeyListener;
 public class DoodleJump extends JFrame implements ActionListener{
 
     private static DoodleJump game;
+    private Board gameBoard;
     private Timer timer;
 
     public DoodleJump(){
+        super("Doodle Jump");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(400,1000);
         setResizable(false);
@@ -24,16 +26,18 @@ public class DoodleJump extends JFrame implements ActionListener{
         //setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         setLocation(dim.width/2-this.getSize().width/2, 0);
 
-        add(new Board());
+        gameBoard = new Board();
+        add(gameBoard);
 
         setVisible(true);
-        timer = new Timer(50, this);
+        timer = new Timer(10, this);
         timer.start();
     }
 
     @Override
     public void actionPerformed(ActionEvent evt){
-        game.repaint();
+        gameBoard.move();
+        gameBoard.repaint();
     }
 
     public static void main(String[] args){
