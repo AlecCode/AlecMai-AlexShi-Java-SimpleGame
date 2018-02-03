@@ -36,13 +36,11 @@ public class Sprite {
     }
 
     //These are accessor methods
-    public int getX(){  return this.x;  }
-    public int getY(){  return this.y;  }
+    public int getSpriteX(){  return  this.x;     }
+    public int getSpriteY(){  return  this.y;     }
     public int getWidth(){  return this.width;  }
     public int getHeight(){ return this.height; }
     public boolean getVisible(){    return this.visible;    }
     public Image getImage(){    return image;   }
-    public Rectangle getBounds(){
-        return new Rectangle(x, y, width, height);
-    }
+    public Rectangle getSpriteBounds(){   return new Rectangle(x, y, width, height);  }
 }
