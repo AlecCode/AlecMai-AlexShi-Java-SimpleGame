@@ -34,7 +34,7 @@ public class DoodleJump extends JFrame implements ActionListener{
         gameBoard = new Board();
         this.add(gameBoard);
 
-        music = new Sound("Sounds/galdin-quay.wav");
+        music = new Sound("Sounds/FINAL_FANTASY_XV_OST_-_Galdin_Quay_Theme.wav");
         music.loop();
 
         //\/ --- Menu Displays --- \

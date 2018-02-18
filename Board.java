@@ -21,6 +21,7 @@ public class Board extends JPanel implements KeyListener, MouseListener, ActionL
     private ArrayList<Background> backgrounds = new ArrayList<Background>();    //backgrounds holds the background information for each Background class
 
     private int distanceTraveled = 0;
+    private int score = 0;
 
     private Timer timer;                                                //timer is a Timer
 
@@ -113,7 +114,7 @@ public class Board extends JPanel implements KeyListener, MouseListener, ActionL
             newDirection = "horizontal";
         }
 
-        int x = rand.nextInt(340);
+        int x = rand.nextInt(440);
         int travel = rand.nextInt(470)+30;
 
         //This limits the minimum size of the travel field so no platforms appear to jitter in place
@@ -125,7 +126,7 @@ public class Board extends JPanel implements KeyListener, MouseListener, ActionL
             speed = rand.nextInt(3)+2;
         }
 
-        createEnemy(x, -10, newDirection, travel, speed);
+        createEnemy(x, -50, newDirection, travel, speed);
     }
 
     public void createBackground(int x, int y){
@@ -159,7 +160,7 @@ public class Board extends JPanel implements KeyListener, MouseListener, ActionL
         remove.clear();
     }
 
-    public void updateEnemies(){                    //This moves every enemy and removes the enemies that are not visible
+    public void updateEnemies(){                            //This moves every enemy and removes the enemies that are not visible
 
         ArrayList<Enemy> remove = new ArrayList<Enemy>();   //remove holds all of the "Enemy" objects that are no longer visible
 
@@ -241,8 +242,8 @@ public class Board extends JPanel implements KeyListener, MouseListener, ActionL
 
             for(Bullet b : bullets){
                 if(b.getBounds().intersects(e.getBounds())){
-                    System.out.println("ran");
                     e.setVisible(false);
+                    score += 500;
                 }
             }
         }
@@ -309,11 +310,15 @@ public class Board extends JPanel implements KeyListener, MouseListener, ActionL
     //This updates the gameBoard
     @Override
     public void actionPerformed(ActionEvent evt){
-        requestFocus();
-        checkOffScreen();
+        Random rand = new Random();                     //rand is a random number generator
 
+        requestFocus();                                 //This gets input focus from the computer
+        checkOffScreen();                               //This checks for objects that are off the screen and are no longer visible
+
+        //This keeps track of how far the player has gone in the y-axis
         if(playerSprite.getVy() < 0){
             distanceTraveled += playerSprite.getVy();
+            score += (playerSprite.getVy() * -1);
             //System.out.println(distanceTraveled);
         }
 
@@ -321,6 +326,11 @@ public class Board extends JPanel implements KeyListener, MouseListener, ActionL
         //System.out.println(distanceTraveled / 100);
         if(distanceTraveled / 200 < 0 && distanceTraveled != 0){
             createRandomPlatform();
+
+            if(rand.nextInt(5) == 3){
+                createRandomEnemy();
+            }
+
             distanceTraveled = 0;
         }
 
@@ -401,7 +411,7 @@ public class Board extends JPanel implements KeyListener, MouseListener, ActionL
         else{
             g.drawImage(playerSprite.getImage(), playerSprite.getX(), playerSprite.getY(), this);
         }
-        
+
         g.drawRect(playerSprite.getBounds().x, playerSprite.getBounds().y, playerSprite.getBounds().width, playerSprite.getBounds().height);
 
         g.setColor(new Color(0,0,0));
@@ -425,5 +435,10 @@ public class Board extends JPanel implements KeyListener, MouseListener, ActionL
                 g.drawOval(b.getBulX(),b.getBulY(),10,10);
             }
         }
+
+        g.setColor(Color.black);
+        g.setFont(new Font("Comic Sans MS",Font.PLAIN,30));
+        g.drawString("Score:",20,30);
+        g.drawString(String.valueOf(score),110,30);
     }
 }

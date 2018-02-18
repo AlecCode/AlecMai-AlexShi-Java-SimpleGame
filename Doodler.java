@@ -178,7 +178,7 @@ public class Doodler implements Commons{
     public void keyTyped(KeyEvent k){}
 
     public void mousePressed(MouseEvent m) {
-        if(m.getButton() == MouseEvent.BUTTON1){
+        if(m.getButton() == MouseEvent.BUTTON1 && m.getY() < this.y){
             this.shoot = true;
         }
     }
