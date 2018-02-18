@@ -20,11 +20,14 @@ public class Platform {
 
     private Rectangle bounds;
 
+    private boolean visible;
+
     public Platform(int x, int y, int width, int height, String direction, int speed){
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.visible = true;
 
         if(direction.equalsIgnoreCase("horizontal")){
             dx = speed;
@@ -54,6 +57,14 @@ public class Platform {
         }
     }
 
+    public void scroll(int offset){
+        this.y -= offset;
+    }
+
+    public void setVisible(boolean vis){
+        this.visible = vis;
+    }
+
     public int getX(){
         return this.x;
     }
@@ -74,5 +85,8 @@ public class Platform {
     }
     public Rectangle getBounds(){
         return new Rectangle(this.x, this.y, this.width, this.height);
+    }
+    public boolean getVisible(){
+        return this.visible;
     }
 }

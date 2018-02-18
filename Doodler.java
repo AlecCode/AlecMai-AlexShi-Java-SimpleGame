@@ -2,6 +2,8 @@ package com;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 /**
@@ -22,35 +24,38 @@ public class Doodler implements Commons{
     private boolean shoot = false;                              //shoot holds whether or not the player is shooting
     private boolean jump = false;                               //jump holds whether or not the player is going to jump
 
+    //private boolean visible;
+
     public Doodler(int x, int y){
         this.x = x;
         this.y = y;
+        //this.visible = true;
         initCharacter();
     }
 
     public void initCharacter(){
         Sprite doodle0 = new Sprite();
-        doodle0.loadImage("DoodlerAnimation/doodle_left.png");
+        doodle0.loadImage("Pictures/DoodlerAnimation/doodle_left.png");
         frames.add(doodle0);
 
         Sprite doodle1 = new Sprite();
-        doodle1.loadImage("DoodlerAnimation/doodle_left_jump.png");
+        doodle1.loadImage("Pictures/DoodlerAnimation/doodle_left_jump.png");
         frames.add(doodle1);
 
         Sprite doodle2 = new Sprite();
-        doodle2.loadImage("DoodlerAnimation/doodle_right.png");
+        doodle2.loadImage("Pictures/DoodlerAnimation/doodle_right.png");
         frames.add(doodle2);
 
         Sprite doodle3 = new Sprite();
-        doodle3.loadImage("DoodlerAnimation/doodle_right_jump.png");
+        doodle3.loadImage("Pictures/DoodlerAnimation/doodle_right_jump.png");
         frames.add(doodle3);
 
         Sprite doodle4 = new Sprite();
-        doodle4.loadImage("DoodlerAnimation/doodle_shoot.png");
+        doodle4.loadImage("Pictures/DoodlerAnimation/doodle_shoot.png");
         frames.add(doodle4);
 
         Sprite doodle5 = new Sprite();
-        doodle5.loadImage("DoodlerAnimation/doodle_shoot_jump.png");
+        doodle5.loadImage("Pictures/DoodlerAnimation/doodle_shoot_jump.png");
         frames.add(doodle5);
     }
 
@@ -67,7 +72,7 @@ public class Doodler implements Commons{
         x += dx;
         y += vy;
 
-        vy += 0.04;                     //This decreases the velocity in the y-axis to simulate gravity
+        vy += 0.03;                     //This decreases the velocity in the y-axis to simulate gravity
 
         if(vy > 0.4){
             this.jump = true;
@@ -172,9 +177,23 @@ public class Doodler implements Commons{
     //This is not used
     public void keyTyped(KeyEvent k){}
 
+    public void mousePressed(MouseEvent m) {
+        if(m.getButton() == MouseEvent.BUTTON1){
+            this.shoot = true;
+        }
+    }
+    public void mouseReleased(MouseEvent m) {
+        if(m.getButton() == MouseEvent.BUTTON1){
+            this.shoot = false;
+        }
+    }
+
     //This changes the velocity of the character in the y direction
     public void setVy(double vy){
         this.vy = vy;
+    }
+    public void setY(int y){
+        this.y = y;
     }
 
     //These are the only required accessor methods
@@ -199,11 +218,35 @@ public class Doodler implements Commons{
     public double getVy(){
         return vy;
     }
-
+    public String getDirection(){
+        return direction;
+    }
+    public boolean getShoot(){
+        return shoot;
+    }
+    public boolean getJump(){
+        return jump;
+    }
     public Image getImage(){
         return frames.get(currentFrame).getSpriteImage();
     }
     public Rectangle getBounds(){
-        return new Rectangle(this.x, this.y, frames.get(currentFrame).getSpriteWidth(), frames.get(currentFrame).getSpriteHeight());
+        if(direction.equalsIgnoreCase("left")){
+            if(shoot){
+                return new Rectangle(this.x, this.y, frames.get(currentFrame).getSpriteWidth(), frames.get(currentFrame).getSpriteHeight());
+            }
+            else{
+                return new Rectangle(this.x, this.y, frames.get(currentFrame).getSpriteWidth() - 20, frames.get(currentFrame).getSpriteHeight());
+            }
+        }
+        else{
+            if(shoot){
+                return new Rectangle(this.x, this.y, frames.get(currentFrame).getSpriteWidth(), frames.get(currentFrame).getSpriteHeight());
+            }
+            else{
+                return new Rectangle(this.x, this.y, frames.get(currentFrame).getSpriteWidth() - 20, frames.get(currentFrame).getSpriteHeight());
+            }
+        }
+        //return new Rectangle(this.x, this.y, frames.get(currentFrame).getSpriteWidth(), frames.get(currentFrame).getSpriteHeight());
     }
 }
