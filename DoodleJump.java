@@ -44,29 +44,7 @@ public class DoodleJump extends JFrame implements ActionListener{
         music = new Sound("Sounds/FINAL_FANTASY_XV_OST_-_Galdin_Quay_Theme.wav");
         music.loop();
 
-        //\/ --- Menu Displays --- \
-        
-        try { //Reading txt File
-			BufferedReader in = new BufferedReader(new FileReader("highscore.txt"));
-			String line;
-			while((line = in.readLine()) != null){ //reads a line if it is not nothing
-				String[] parts = line.split(" "); //each line will be an array in the form of [string, int]
-				this.highNames.add(parts[0]);
-				this.highscore.add(Integer.parseInt(parts[1])); //when reading the file, order doesnt matter since the scores/names in the txt or in order when written
-			}
-		}
-		
-		catch (IOException e){ //if theres no txt file, it will add filler stats
-			for(int i = 0; i < 5; i++){
-				this.highNames.add("?????");
-				this.highscore.add(0);
-			}
-		}
-		for(int i = 0; i < this.highNames.size(); i++){
-			System.out.println(this.highNames.get(i));
-			System.out.println(this.highscore.get(i));
-		}
-
+        //\/ --- Menu Displays --- \/
         setIconImage(new ImageIcon("Pictures/Doodle_Jump.png").getImage()); //sets the icon image for the game
 
         this.mPage.setLayout(null); //null layout
@@ -139,61 +117,6 @@ public class DoodleJump extends JFrame implements ActionListener{
 		highImg.setLocation(150,25);
 		this.hPage.add(highImg,1);
 		
-		JLabel name1 = new JLabel("1. " + highNames.get(0)); //Displaying highscores from txt file
-		name1.setFont(new Font("Comic Sans ms", Font.PLAIN, 30));
-		name1.setSize(400,100);
-		name1.setLocation(50,195);
-		this.hPage.add(name1,1);
-		JLabel score1 = new JLabel(Integer.toString(highscore.get(0)));
-		score1.setFont(new Font("Comic Sans ms", Font.PLAIN, 30));
-		score1.setSize(400,100);
-		score1.setLocation(82,225);
-		this.hPage.add(score1,1);
-		
-		JLabel name2 = new JLabel("2. " + highNames.get(1));
-		name2.setFont(new Font("Comic Sans ms", Font.PLAIN, 30));
-		name2.setSize(400,100);
-		name2.setLocation(50,325);
-		this.hPage.add(name2,1);
-		JLabel score2 = new JLabel(Integer.toString(highscore.get(1)));
-		score2.setFont(new Font("Comic Sans ms", Font.PLAIN, 30));
-		score2.setSize(400,100);
-		score2.setLocation(85,355);
-		this.hPage.add(score2,1);
-		
-		JLabel name3 = new JLabel("3. " + highNames.get(2));
-		name3.setFont(new Font("Comic Sans ms", Font.PLAIN, 30));
-		name3.setSize(400,100);
-		name3.setLocation(50,455);
-		this.hPage.add(name3,1);
-		JLabel score3 = new JLabel(Integer.toString(highscore.get(2)));
-		score3.setFont(new Font("Comic Sans ms", Font.PLAIN, 30));
-		score3.setSize(300,100);
-		score3.setLocation(85,480);
-		this.hPage.add(score3,1);
-		
-		JLabel name4 = new JLabel("4. " + highNames.get(3));
-		name4.setFont(new Font("Comic Sans ms", Font.PLAIN, 30));
-		name4.setSize(400,100);
-		name4.setLocation(50,585);
-		this.hPage.add(name4,1);
-		JLabel score4 = new JLabel(Integer.toString(highscore.get(3)));
-		score4.setFont(new Font("Comic Sans ms", Font.PLAIN, 30));
-		score4.setSize(400,100);
-		score4.setLocation(85,615);
-		this.hPage.add(score4,1);
-		
-		JLabel name5 = new JLabel("5. " + highNames.get(4));
-		name5.setFont(new Font("Comic Sans ms", Font.PLAIN, 30));
-		name5.setSize(400,100);
-		name5.setLocation(50,715);
-		this.hPage.add(name5,1);
-		JLabel score5 = new JLabel(Integer.toString(highscore.get(4)));
-		score5.setFont(new Font("Comic Sans ms", Font.PLAIN, 30));
-		score5.setSize(400,100);
-		score5.setLocation(85,745);
-		this.hPage.add(score5,1);
-		
 		//Add Reset Button
         this.confirmBut = new JButton(new ImageIcon("Pictures/confirm.png"));
         this.confirmBut.addActionListener(this);
@@ -253,6 +176,88 @@ public class DoodleJump extends JFrame implements ActionListener{
         }
         
         else if(source == this.scoreBut){
+        	JLabel rect2 = new JLabel(new ImageIcon("Pictures/yellowPaper.jpg"));
+			rect2.setSize(500,600);
+			rect2.setLocation(0,200);
+			this.hPage.add(rect2,1);
+        	
+        	try { //Reading txt File
+				BufferedReader in = new BufferedReader(new FileReader("highscore.txt"));
+				String line;
+				while((line = in.readLine()) != null){ //reads a line if it is not nothing
+					String[] parts = line.split(" "); //each line will be an array in the form of [string, int]
+					this.highNames.add(parts[0]);
+					this.highscore.add(Integer.parseInt(parts[1])); //when reading the file, order doesnt matter since the scores/names in the txt or in order when written
+				}
+			}
+		
+			catch (IOException e){ //if theres no txt file, it will add filler stats
+				for(int i = 0; i < 5; i++){
+					this.highNames.add("?????");
+					this.highscore.add(0);
+				}
+			}
+			
+			for(int i = 0; i < this.highNames.size(); i++){
+				System.out.println(this.highNames.get(i));
+				System.out.println(this.highscore.get(i));
+			}
+			
+			JLabel name1 = new JLabel("1. " + highNames.get(0)); //Displaying highscores from txt file
+			name1.setFont(new Font("Comic Sans ms", Font.PLAIN, 30));
+			name1.setSize(400,100);
+			name1.setLocation(50,183);
+			this.hPage.add(name1,1);
+			JLabel score1 = new JLabel(Integer.toString(highscore.get(0)));
+			score1.setFont(new Font("Comic Sans ms", Font.PLAIN, 30));
+			score1.setSize(400,100);
+			score1.setLocation(82,230);
+			this.hPage.add(score1,1);
+			
+			JLabel name2 = new JLabel("2. " + highNames.get(1));
+			name2.setFont(new Font("Comic Sans ms", Font.PLAIN, 30));
+			name2.setSize(400,100);
+			name2.setLocation(50,303);
+			this.hPage.add(name2,1);
+			JLabel score2 = new JLabel(Integer.toString(highscore.get(1)));
+			score2.setFont(new Font("Comic Sans ms", Font.PLAIN, 30));
+			score2.setSize(400,100);
+			score2.setLocation(85,355);
+			this.hPage.add(score2,1);
+			
+			JLabel name3 = new JLabel("3. " + highNames.get(2));
+			name3.setFont(new Font("Comic Sans ms", Font.PLAIN, 30));
+			name3.setSize(400,100);
+			name3.setLocation(50,425);
+			this.hPage.add(name3,1);
+			JLabel score3 = new JLabel(Integer.toString(highscore.get(2)));
+			score3.setFont(new Font("Comic Sans ms", Font.PLAIN, 30));
+			score3.setSize(300,100);
+			score3.setLocation(85,475);
+			this.hPage.add(score3,1);
+			
+			JLabel name4 = new JLabel("4. " + highNames.get(3));
+			name4.setFont(new Font("Comic Sans ms", Font.PLAIN, 30));
+			name4.setSize(400,100);
+			name4.setLocation(50,545);
+			this.hPage.add(name4,1);
+			JLabel score4 = new JLabel(Integer.toString(highscore.get(3)));
+			score4.setFont(new Font("Comic Sans ms", Font.PLAIN, 30));
+			score4.setSize(400,100);
+			score4.setLocation(85,595);
+			this.hPage.add(score4,1);
+			
+			JLabel name5 = new JLabel("5. " + highNames.get(4));
+			name5.setFont(new Font("Comic Sans ms", Font.PLAIN, 30));
+			name5.setSize(400,100);
+			name5.setLocation(50,645);
+			this.hPage.add(name5,1);
+			JLabel score5 = new JLabel(Integer.toString(highscore.get(4)));
+			score5.setFont(new Font("Comic Sans ms", Font.PLAIN, 30));
+			score5.setSize(400,100);
+			score5.setLocation(85,692);
+			this.hPage.add(score5,1);
+			
 		    cLayout.show(this.cards,"highscore");
 		}
 		
