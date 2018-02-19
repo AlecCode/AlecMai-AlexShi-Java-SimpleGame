@@ -45,6 +45,29 @@ public class DoodleJump extends JFrame implements ActionListener{
         music.loop();
 
         //\/ --- Menu Displays --- \/
+        
+        try { //Reading txt File
+			BufferedReader in = new BufferedReader(new FileReader("highscore.txt"));
+			String line;
+			while((line = in.readLine()) != null){ //reads a line if it is not nothing
+				String[] parts = line.split(" "); //each line will be an array in the form of [string, int]
+				this.highNames.add(parts[0]);
+				this.highscore.add(Integer.parseInt(parts[1])); //when reading the file, order doesnt matter since the scores/names in the txt or in order when written
+			}
+		}
+	
+		catch (IOException e){ //if theres no txt file, it will add filler stats
+			for(int i = 0; i < 5; i++){
+				this.highNames.add("?????");
+				this.highscore.add(0);
+			}
+		}
+		
+		for(int i = 0; i < this.highNames.size(); i++){
+			System.out.println(this.highNames.get(i));
+			System.out.println(this.highscore.get(i));
+		}
+			
         setIconImage(new ImageIcon("Pictures/Doodle_Jump.png").getImage()); //sets the icon image for the game
 
         this.mPage.setLayout(null); //null layout
