@@ -14,11 +14,11 @@ public class Board extends JPanel implements KeyListener, MouseListener, ActionL
     private int mX;
     private int mY;
 
-    private Doodler playerSprite;                                               //playerSprite holds the player's character info
-    private ArrayList<Platform> platforms = new ArrayList<Platform>();          //platforms holds the platform information of each Platform class
-    private ArrayList<Enemy> enemies = new ArrayList<Enemy>();                  //enemies holds the enemy information of each Enemy class
+    private Doodler playerSprite;                                       //playerSprite holds the player's character info
+    private ArrayList<Platform> platforms = new ArrayList<Platform>();         //platforms holds the platform information of each Platform class
+    private ArrayList<Enemy> enemies = new ArrayList<Enemy>();              //enemies holds the enemy information of each Enemy class
     private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-    private ArrayList<Background> backgrounds = new ArrayList<Background>();    //backgrounds holds the background information for each Background class
+    private ArrayList<Background> backgrounds = new ArrayList<Background>();     //backgrounds holds the background information for each Background class
 
     private int distanceTraveled = 0;
     private int score = 0;
